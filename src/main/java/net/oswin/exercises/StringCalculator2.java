@@ -36,15 +36,9 @@ public class StringCalculator2 {
             }
         }
 
-        //выводим промежуточные результаты
-        String midres = arrstr[0];
-        for (int h = 1; h < arrstr.length; h++) {
-            midres = midres + arrop[h] + arrstr[h];
-        }
-        System.out.println(midres);
+        print(arrstr, arrop);
         //arrstr = [1,3,24]
         //вычисляем сложение и вычитание
-        String num2 = "";
         int sum = Integer.parseInt(arrstr[0]);
         for (int k = 1; k < arrstr.length; k++) {
             sum = calc(arrop[k], sum, arrstr[k]);
@@ -52,6 +46,17 @@ public class StringCalculator2 {
 
 
         System.out.println("Ответ: " + sum);
+    }
+
+    /**
+     * выводим промежуточные результаты
+     */
+    public static void print(String[] arrstr, String[] arrop) {
+        String midres = arrstr[0];
+        for (int h = 1; h < arrstr.length; h++) {
+            midres = midres + arrop[h] + arrstr[h];
+        }
+        System.out.println(midres);
     }
 
     /**
