@@ -29,14 +29,5 @@ public class Cycles {
         for (String s : Arrays.asList("a","b","c","d","e")) {
             System.out.print(s);
         }
-        //lambdas
-        System.out.println();
-        Arrays.asList("a","b","c","d","e").forEach(s -> {
-            System.out.print(s);
-        });
-        System.out.println();
-        Arrays.asList("a","b","c","d","e").forEach(s -> System.out.print(s));
-        System.out.println();
-        Arrays.asList("a","b","c","d","e").forEach(System.out::print);
     }
 }
