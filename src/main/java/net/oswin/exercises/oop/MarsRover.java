@@ -8,7 +8,9 @@ public class MarsRover {
     //СВОЙСТВА
     private double x;
     private double y;
-    private double angle = Math.PI;
+    private double angle;
+    private double rad;
+
 
 
     //КОНСТРУКТОР
@@ -16,27 +18,39 @@ public class MarsRover {
      * Посадить марсоход на Марс
      */
     public MarsRover(double x, double y) {
+        this(x, y, 90);
+    }
+
+    public MarsRover(double x, double y, double angle) {
         this.x = x;
         this.y = y;
+        this.angle = angle;
+        calcRad();
     }
 
     //МЕТОДЫ
     public void turnLeft(double angle) {
         this.angle = this.angle + angle;
+        calcRad();
     }
 
     public void turnRight(double angle) {
         this.angle = this.angle - angle;
+        calcRad();
+    }
+
+    private void calcRad() {
+        rad = angle * Math.PI / 180;
     }
 
     public void goForward(double distance) {
-        x = x + distance * Math.sin(angle);
-        y = y - distance * Math.cos(angle);
+        x = x + distance * Math.sin(rad);
+        y = y + distance * Math.cos(rad);
     }
 
     public void goBack(double distance) {
-        x = x - distance * Math.sin(angle);
-        y = y + distance * Math.cos(angle);
+        x = x - distance * Math.sin(rad);
+        y = y - distance * Math.cos(rad);
     }
 
     public double getLocationX() {

@@ -33,7 +33,7 @@ public class StringCalculator2 {
 
     /**
      * Метод очищает строку от лишних символов
-     * @param sc
+     * @param str
      * @return
      */
     public static String removeExtraSymbols(String str) {
