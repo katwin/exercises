@@ -19,7 +19,7 @@ public class Strings {
         System.out.println(s.substring(1,3));
         System.out.println(s.substring(1));
         System.out.println(s.substring(s.indexOf("23")));
-        System.out.println(s.equals("1234"));
+        System.out.println(s.equals("1234"));//true
         System.out.println(s == "1234"); //false
         String s2 = s;
         System.out.println(s == s2);//true

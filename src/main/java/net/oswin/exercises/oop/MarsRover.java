@@ -60,4 +60,16 @@ public class MarsRover {
     public double getLocationY() {
         return y;
     }
+
+    public String toString() {
+        return getLocationX() + "," + getLocationY();
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj.getClass() != this.getClass())
+            return false;
+        return getLocationX() == ((MarsRover)obj).getLocationX() && getLocationY() ==  ((MarsRover)obj).getLocationY();
+    }
 }

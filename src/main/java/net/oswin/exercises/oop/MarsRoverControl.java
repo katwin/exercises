@@ -1,7 +1,7 @@
 package net.oswin.exercises.oop;
 
 /**
- * Created by Kate on 17.04.2017.
+ * Центр управления марсоходами.
  */
 public class MarsRoverControl {
     public static void main(String[] args) {
@@ -20,5 +20,9 @@ public class MarsRoverControl {
         opportunity.turnLeft(90);
         opportunity.goForward(10);
         System.out.println("Opportunity's location is " + opportunity.getLocationX() + "," + opportunity.getLocationY());
+
+        System.out.println(curiosity);
+        System.out.println(curiosity == opportunity);
+        System.out.println(curiosity.equals(opportunity));
     }
 }
