@@ -1,5 +1,7 @@
 package net.oswin.exercises.oop.inheritance;
 
+import net.oswin.exercises.oop.MarsRover;
+
 /**
  * Работа с фигурами.
  */
@@ -25,5 +27,24 @@ public class ShapesMain {
         System.out.println("Квадрат:");
         System.out.println("S = " + square.getSquare());
         System.out.println("P = " + square.getPerimeter());
+
+        Shape[] shapes = new Shape[4];
+        shapes[0] = triangle;
+        shapes[1] = circle;
+        shapes[2] = rectangle;
+        shapes[3] = square;
+        double sumSquare = 0;
+        double sumPerimeter = 0;
+        for (Shape shape : shapes) {
+            sumSquare += shape.getSquare();
+            sumPerimeter += shape.getPerimeter();
+        }
+        System.out.println("Суммарная площадь = " + sumSquare);
+        System.out.println("Суммарный периметр = " + sumPerimeter);
+
+        Parallelogram parallelogram = new Parallelogram(4, 8, 30);
+        Tetragon tetragon = new Tetragon(4, 8, 4, 8, 150, 30);
+        System.out.println(parallelogram.getSquare());
+        System.out.println(tetragon.getSquare());
     }
 }
