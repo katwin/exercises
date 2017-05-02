@@ -6,10 +6,10 @@ package net.oswin.exercises.oop.inheritance;
 public class Tetragon extends Shape {
     protected double side1;
     protected double side2;
-    private double side3;
-    private double side4;
-    private double angle12;
-    private double angle34;
+    protected double side3;
+    protected double side4;
+    protected double angle12;
+    protected double angle34;
 
     public Tetragon(double side1, double side2, double side3, double side4, double angle12, double angle34) {
         this.side1 = side1;

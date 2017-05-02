@@ -1,7 +1,5 @@
 package net.oswin.exercises.oop.inheritance;
 
-import net.oswin.exercises.oop.MarsRover;
-
 /**
  * Работа с фигурами.
  */
@@ -46,5 +44,7 @@ public class ShapesMain {
         Tetragon tetragon = new Tetragon(4, 8, 4, 8, 150, 30);
         System.out.println(parallelogram.getSquare());
         System.out.println(tetragon.getSquare());
+
+        //private < default < protected < public
     }
 }

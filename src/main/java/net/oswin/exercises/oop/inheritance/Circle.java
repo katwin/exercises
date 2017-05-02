@@ -3,18 +3,21 @@ package net.oswin.exercises.oop.inheritance;
 /**
  * Круг
  */
-public class Circle extends Shape {
-    private double radius;
+public class Circle extends Ellipse {
 
     public Circle(double radius) {
-        this.radius = radius;
+        super(radius, radius);
+    }
+
+    public double getRadius() {
+        return width;
     }
 
     public double getSquare() {
-        return Math.PI * Math.pow(radius, 2);
+        return Math.PI * Math.pow(getRadius(), 2);
     }
 
     public double getPerimeter() {
-        return 2 * Math.PI * radius;
+        return 2 * Math.PI * getRadius();
     }
 }
