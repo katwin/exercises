@@ -12,7 +12,7 @@ public class LongestWord {
         System.out.println("Введите текст:");
         int maxLength = 0;
         String longestWord = null;
-        String text[] = sc.nextLine().replaceAll("\\s+", " ").split(" ");
+        String text[] = sc.nextLine().replaceAll("[^А-ЯA-Zа-яa-z0-9]", " ").replaceAll("\\s+", " ").split(" ");
         for (int i = 0; i < text.length; i++) {
             String str = text[i];
             int length = str.length();
