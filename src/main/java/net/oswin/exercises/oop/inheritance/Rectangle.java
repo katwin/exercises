@@ -12,6 +12,9 @@ public class Rectangle extends Shape {
         this.width = width;
     }
 
+    public double getWidth() {
+        return width;
+    }
 
     public double getSquare() {
         return height * width;

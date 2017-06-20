@@ -5,7 +5,7 @@ package net.oswin.exercises.oop;
  */
 public class MarsRover {
 
-    //СВОЙСТВА
+    //ПОЛЯ
     private double x;
     private double y;
     private double angle;
