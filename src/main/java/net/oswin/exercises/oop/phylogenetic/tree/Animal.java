@@ -6,9 +6,9 @@ import java.util.Random;
  * Царство животных
  */
 public abstract class Animal {
-    protected int power;
+    protected int power = 1;
     protected boolean gender;
-    protected int fecundity;
+    protected int fecundity = 1;
 
     public Animal() {
         this.power = 50 + new Random().nextInt(51);
@@ -17,7 +17,7 @@ public abstract class Animal {
 
     public abstract Animal find(Animal[] habitat);
 
-    public void eat(Animal food) {
+    public final void eat(Animal food) {
         if (food.power > this.power)
             throw new IllegalArgumentException();
         power += food.power;
@@ -34,6 +34,14 @@ public abstract class Animal {
         }
         return null;
     }
-
+    
     protected abstract Animal born(Animal partner);
+
+    @Override
+    public String toString() {
+        return this.getClass() + "{" +
+                "power=" + power +
+                ", gender=" + gender +
+                "}\n";
+    }
 }

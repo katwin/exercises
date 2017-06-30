@@ -3,7 +3,7 @@ package net.oswin.exercises.oop.inheritance;
 /**
  * Круг
  */
-public class Circle extends Ellipse {
+public final class Circle extends Ellipse {
 
     public Circle(double radius) {
         super(radius, radius);

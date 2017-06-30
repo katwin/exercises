@@ -24,6 +24,7 @@ public class Arrays {
         }
         System.out.println(abyte2[9]);
 
+        //копирование массива в другой с другим размером
         abyte2 = java.util.Arrays.copyOf(abyte, 11);
         System.out.println(abyte2[9]);
 
