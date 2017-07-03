@@ -21,7 +21,7 @@ public class Habitat {
             habitat[i] = new Human();
         }
 
-        int N = 20;
+        int N = 10;
         for (int i = 0; i < N; i++) {
             Animal[] children = new Animal[0];
             for (Animal animal : habitat) {

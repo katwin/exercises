@@ -20,6 +20,17 @@ public abstract class Mammal extends Animal {
     //Если этот обьект принадлежит тому же классу, то выполняется метод spawn, в противном случае - eat.
     @Override
     public Animal find(Animal[] habitat) {
+        power -= 5;
+        for (int i = 0; i < habitat.length; i++) {
+            Animal animal = habitat[i];
+            if (animal == this)
+                continue;
+            if ((!animal.getClass().equals(this.getClass())) && (animal.power < this.power)) {
+                return animal;
+            } else {
+                return animal;
+            }
+        }
         return null;
     }
 }
