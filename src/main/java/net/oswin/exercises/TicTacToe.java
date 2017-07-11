@@ -8,13 +8,11 @@ import java.util.Objects;
  * 0  x o x
  * 1  x o o
  * 2  x x o
- * upd: В методах turnX и turnO написано [x-1][y-1], чтобы игроки могли вводить координаты от 1 до 3 для удобства.
- * upd: В методах checkWinnerX и checkWinnerO (по незнанию) не учтены варианты с диагональными выигрышными линиями.
  */
 public class TicTacToe {
     private char[][] ttt = new char[3][3];
-    //состояние игры
     private boolean gamepos = true;
+    private int k = 0;
 
     public TicTacToe() {
         for (int i = 0; i < 3; i++) {
@@ -26,7 +24,6 @@ public class TicTacToe {
 
     /**
      * Ход крестика
-     *
      * @param x
      * @param y
      */
@@ -36,6 +33,7 @@ public class TicTacToe {
         } else {
             throw new IllegalArgumentException();
         }
+        k++;
         gamepos = false;
     }
 
@@ -54,10 +52,18 @@ public class TicTacToe {
         gamepos = true;
     }
 
+    /**
+     * Определяет победу Х
+     * @return Возвращает true в случае победы, false - в других случаях
+     */
     public boolean isWinX() {
         return whoIsWin('X');
     }
 
+    /**
+     * Определяет победу О
+     * @return Возвращает true в случае победы, false - в других случаях
+     */
     public boolean isWinO() {
         return whoIsWin('O');
     }
@@ -95,4 +101,12 @@ public class TicTacToe {
         }
         return res;
     }
+
+    public boolean isDraw() {
+        if (k == 5) {
+            return true;
+        }
+        return false;
+    }
+
 }
