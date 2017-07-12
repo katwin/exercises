@@ -1,4 +1,6 @@
-package net.oswin.exercises;
+package net.oswin.exercises.homework.tictactoe;
+
+import net.oswin.exercises.homework.tictactoe.TicTacToe;
 
 import java.util.Scanner;
 
@@ -40,16 +42,6 @@ public class TicTacToeMain {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Преобразование метода toString
-     * Не реализуется в ходе psvm
-     */
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
     /**

@@ -1,23 +1,22 @@
-package net.oswin.exercises;
+package net.oswin.exercises.homework;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Строковой калькулятор, без учета приоритета
+ * Учимся основам Java. Типы данных, логические и арифметические операции, циклы.
  */
-public class StringCalculator {
+public class SimpleCalculator {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите арифметическое выражение:");
-        String s = sc.nextLine();
-        sc = new Scanner(s);
-        int sum = 0;
-        int b = 0;
-        String c = null;
-        int a = 0;
+        System.out.println("Здесь вы можете что-нибудь посчитать.");
+        Double a = null;
+        double b = 0;
+        String c = "";
         do {
+            System.out.print("Введите число:    ");
             b = sc.nextInt();
-            if (c != null) {
+            if (a != null) {
                 if (c.equals("+"))
                     a = a + b;
                 else if (c.equals("-"))
@@ -30,6 +29,7 @@ public class StringCalculator {
                     throw new UnsupportedOperationException("Операция \"" + c + "\" некорректна.");
             } else
                 a = b;
+            System.out.print("Введите операцию: ");
             c = sc.next();
         } while (!c.equals("="));
         System.out.println("Ответ:            " + a);

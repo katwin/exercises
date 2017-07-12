@@ -1,4 +1,4 @@
-package net.oswin.exercises;
+package net.oswin.exercises.homework;
 
 import java.util.Scanner;
 
