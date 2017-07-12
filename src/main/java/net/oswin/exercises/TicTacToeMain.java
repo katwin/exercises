@@ -4,60 +4,99 @@ import java.util.Scanner;
 
 /**
  * Процесс игры "Крестики-нолики".
- * домашнее задание 6 июля к 10 июля: попытаться создать счетчик побед крестиков и ноликов.
- * upd: Домашнее задание сделано, но не учтено, что в run играется всего одна игра. Будет исправлено.
+ * Добавлена функция многоразовой игры.
+ * Основной процесс игры перенесен в методы.
+ * Итерация внутреннего цикла отвечает за один ход.
  */
 public class TicTacToeMain {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int victoriesX = 0;
-        int victoriesO = 0;
+        int[] victories = new int[2];
         System.out.println("Игра <<Крестики-нолики 3х3>>.");
         boolean nextgame = true;
         do {
             TicTacToe tictactoe = new TicTacToe();
-            while (true) {
-                System.out.println("Ходят крестики:");
-                String[] xx = sc.nextLine().split(" ");
-                int x = Integer.parseInt(xx[0]);
-                int y = Integer.parseInt(xx[1]);
-                tictactoe.turnX(x, y);
-                System.out.println(tictactoe.toString());
-                if (tictactoe.isWinX()) {
-                    System.out.println("Крестики победили.");
-                    victoriesX++;
-                    System.out.println("Количество побед крестиков: " + victoriesX);
-                    System.out.println("Количество побед ноликов: " + victoriesO);
-                    break;
-                }
-                if (tictactoe.isDraw()) {
-                    System.out.println("Ничья.");
-                    break;
-                }
-                System.out.println("Ходят нолики:");
-                xx = sc.nextLine().split(" ");
-                x = Integer.parseInt(xx[0]);
-                y = Integer.parseInt(xx[1]);
-                tictactoe.turnO(x, y);
-                System.out.println(tictactoe.toString());
-                if (tictactoe.isWinO()) {
-                    System.out.println("Нолики победили.");
-                    victoriesO++;
-                    System.out.println("Количество побед крестиков: " + victoriesX);
-                    System.out.println("Количество побед ноликов: " + victoriesO);
-                    break;
-                }
-            }
-            System.out.println("Хотите продолжить?");
-            String answer = sc.nextLine();
-            if (answer.equals("Да")) {
+            byte player = 0;
+            do {
+                player = (byte) Math.abs(player - 1);
+                doTurn(player, tictactoe);
+            } while (!hasWinner(victories, tictactoe, player) && !hasDraw(tictactoe));
+            System.out.println("Хотите продолжить? Выберите + или -");
+            String answer = sc.next();
+            if (answer.equals("+")) {
                 nextgame = true;
             } else
-            if (answer.equals("Нет")) {
+            if (answer.equals("-")) {
                 nextgame = false;
             } else {
                 throw new IllegalArgumentException("Некорректный ответ.");
             }
         } while (nextgame);
+    }
+
+    private static boolean hasDraw(TicTacToe tictactoe) {
+        if (tictactoe.isDraw()) {
+            System.out.println("Ничья.");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Преобразование метода toString
+     * Не реализуется в ходе psvm
+     */
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    /**
+     * Преобразует игрока byte в переменную String для правильного вывода текста.
+     * @param player
+     * @return Возвращает имя игрока.
+     */
+    private static String getType(byte player) {
+        String type = null;
+        if (player == 1) {
+            type = "крестики";
+        } else {
+            type = "нолики";
+        }
+        return type;
+    }
+
+    /**
+     * Ищет победителя и объявляет его при его наличии.
+     * @param victories
+     * @param tictactoe
+     * @param player
+     * @return Возвращает ответ, есть ли победитель.
+     */
+    private static boolean hasWinner(int[] victories, TicTacToe tictactoe, byte player) {
+        if (tictactoe.isWin(player)) {
+            System.out.println("Победили " + getType(player) + ".");
+            victories[player]++;
+            System.out.println("Количество побед крестиков: " + victories[1]);
+            System.out.println("Количество побед ноликов: " + victories[0]);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Ход Х или О
+     * @param player
+     * @param tictactoe
+     */
+    private static void doTurn(byte player, TicTacToe tictactoe) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ходят " + getType(player) + ":");
+        String[] xx = sc.nextLine().split(" ");
+        int x = Integer.parseInt(xx[0]);
+        int y = Integer.parseInt(xx[1]);
+        tictactoe.turn(x, y, player);
+        System.out.println(tictactoe.toString());
     }
 }

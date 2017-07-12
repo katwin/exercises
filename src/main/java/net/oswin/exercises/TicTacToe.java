@@ -1,7 +1,5 @@
 package net.oswin.exercises;
 
-import java.util.Objects;
-
 /**
  * Игра крестики-нолики.
  *    0 1 2
@@ -11,7 +9,7 @@ import java.util.Objects;
  */
 public class TicTacToe {
     private char[][] ttt = new char[3][3];
-    private boolean gamepos = true;
+    private byte prev = 0;
     private int k = 0;
 
     public TicTacToe() {
@@ -23,52 +21,42 @@ public class TicTacToe {
     }
 
     /**
-     * Ход крестика
+     * Ход
      * @param x
      * @param y
      */
-    public void turnX(int x, int y) {
-        if (gamepos && (ttt[x - 1][y - 1] == ' ')) {
-            ttt[x - 1][y - 1] = 'X';
+    public void turn(int x, int y, byte player) {
+        char xo = ' ';
+        if (player == 1) {
+            xo = 'X';
+        } else {
+           xo = 'O';
+        }
+        if ((prev != player) && (ttt[x - 1][y - 1] == ' ')) {
+            ttt[x - 1][y - 1] = xo;
         } else {
             throw new IllegalArgumentException();
         }
         k++;
-        gamepos = false;
+        prev = player;
     }
 
     /**
-     * Ход нолика
-     *
-     * @param x
-     * @param y
+     * Определяет победу Х или О.
+     * @return Возвращает true в случае победы, false - в других случаях
      */
-    public void turnO(int x, int y) {
-        if (!gamepos && (ttt[x - 1][y - 1] == ' ')) {
-            ttt[x - 1][y - 1] = 'O';
+    public boolean isWin(byte player) {
+        return whoIsWin(player);
+    }
+
+
+    private boolean whoIsWin(byte player) {
+        char pl = ' ';
+        if (player == 1) {
+            pl = 'X';
         } else {
-            throw new IllegalArgumentException();
+            pl = 'O';
         }
-        gamepos = true;
-    }
-
-    /**
-     * Определяет победу Х
-     * @return Возвращает true в случае победы, false - в других случаях
-     */
-    public boolean isWinX() {
-        return whoIsWin('X');
-    }
-
-    /**
-     * Определяет победу О
-     * @return Возвращает true в случае победы, false - в других случаях
-     */
-    public boolean isWinO() {
-        return whoIsWin('O');
-    }
-
-    private boolean whoIsWin(char player) {
         int h = 0;
         int v = 0;
         int md = 0;
@@ -77,10 +65,10 @@ public class TicTacToe {
             h = 0;
             v = 0;
             for (int j = 0; j < 3; j++) {
-                if ((i == j) && (ttt[i][j] == player)) md++;
-                if ((i + j == 2) && (ttt[i][j] == player)) sd++;
-                if (ttt[i][j] == player) h++;
-                if (ttt[j][i] == player) v++;
+                if ((i == j) && (ttt[i][j] == pl)) md++;
+                if ((i + j == 2) && (ttt[i][j] == pl)) sd++;
+                if (ttt[i][j] == pl) h++;
+                if (ttt[j][i] == pl) v++;
             }
             if (h == 3 || v == 3 || md == 3 || sd == 3)
                 return true;
@@ -103,7 +91,7 @@ public class TicTacToe {
     }
 
     public boolean isDraw() {
-        if (k == 5) {
+        if (k == 9) {
             return true;
         }
         return false;
