@@ -11,6 +11,40 @@ import java.util.Scanner;
  * Итерация внутреннего цикла отвечает за один ход.
  */
 public class TicTacToeMain {
+
+    public static void main2(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        boolean nextgame = true;
+        System.out.println("Игра <<Крестики-нолики 3х3>>.");
+        GameBoy gameBoy = new GameBoy();
+        do {
+            TicTacToe tictactoe = gameBoy.startGame();
+            do {
+                if (gameBoy.whoPlay() == 1) {
+                    System.out.println("Ходят крестики:");
+                } else System.out.println("Ходят нолики:");
+                String[] xx = sc.nextLine().split(" ");
+                int x = Integer.parseInt(xx[0]);
+                int y = Integer.parseInt(xx[1]);
+                gameBoy.turn(tictactoe,x,y);
+            } while (gameBoy.isEnd(tictactoe));
+            if (gameBoy.whoWin(tictactoe) == 'X') {
+                System.out.println("Крестики победили.");
+            } else if (gameBoy.whoWin(tictactoe) == 'O') {
+                System.out.println("Нолики победили.");
+            } else System.out.println("Ничья.");
+            System.out.println("Хотите продолжить? Введите + или -.");
+            String answer = sc.next();
+            if (answer.equals("+")) {
+                nextgame = true;
+            } else if (answer.equals("-")) {
+                nextgame = false;
+            } else throw new IllegalArgumentException("Некорректный ответ.");
+        } while (nextgame);
+        System.out.println("Количество побед крестиков: " + gameBoy.getStatistics()[1]);
+        System.out.println("Количество побед ноликов: " + gameBoy.getStatistics()[0]);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int[] victories = new int[2];

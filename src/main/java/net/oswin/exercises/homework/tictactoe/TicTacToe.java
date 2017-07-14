@@ -32,7 +32,7 @@ public class TicTacToe {
         } else {
            xo = 'O';
         }
-        if ((prev != player) && (ttt[x - 1][y - 1] == ' ')) {
+        if ((prev != (player)) && (ttt[x - 1][y - 1] == ' ')) {
             ttt[x - 1][y - 1] = xo;
         } else {
             throw new IllegalArgumentException();
@@ -45,12 +45,24 @@ public class TicTacToe {
      * Определяет победу Х или О.
      * @return Возвращает true в случае победы, false - в других случаях
      */
-    public boolean isWin(byte player) {
-        return whoIsWin(player);
+    public char whoIsWin(byte player, int[] victories) {
+        /**if (isWin(player) && (player == 1)) {
+            return 'X';
+        } else if (isWin(player) && (player == 0)) {
+            return 'O';
+        }
+         */
+        if (isWin(player)) {
+            victories[player]++;
+            if (player == 1) {
+                return 'X';
+            } else return 'O';
+        }
+        return ' ';
     }
 
 
-    private boolean whoIsWin(byte player) {
+    public boolean isWin(byte player) {
         char pl = ' ';
         if (player == 1) {
             pl = 'X';
@@ -77,6 +89,15 @@ public class TicTacToe {
         return false;
     }
 
+    public char whoIsPlay() {
+        char who = ' ';
+        if (prev == 0) {
+            who = 'X';
+        } else {
+            who = 'O';
+        }
+        return who;
+    }
 
     @Override
     public String toString() {
