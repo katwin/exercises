@@ -12,27 +12,30 @@ import java.util.Scanner;
  */
 public class TicTacToeMain {
 
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean nextgame = true;
         System.out.println("Игра <<Крестики-нолики 3х3>>.");
         GameBoy gameBoy = new GameBoy();
         do {
-            TicTacToe tictactoe = gameBoy.startGame();
+            gameBoy.startGame();
             do {
-                if (gameBoy.whoPlay() == 1) {
+                if (gameBoy.whoPlay() == 'X') {
                     System.out.println("Ходят крестики:");
                 } else System.out.println("Ходят нолики:");
                 String[] xx = sc.nextLine().split(" ");
                 int x = Integer.parseInt(xx[0]);
                 int y = Integer.parseInt(xx[1]);
-                gameBoy.turn(tictactoe,x,y);
-            } while (gameBoy.isEnd(tictactoe));
-            if (gameBoy.whoWin(tictactoe) == 'X') {
+                gameBoy.turn(x,y);
+                System.out.println(gameBoy.toString());
+            } while (!gameBoy.isEnd());
+            if (gameBoy.whoWin() == 'X') {
                 System.out.println("Крестики победили.");
-            } else if (gameBoy.whoWin(tictactoe) == 'O') {
+            } else if (gameBoy.whoWin() == 'O') {
                 System.out.println("Нолики победили.");
             } else System.out.println("Ничья.");
+            System.out.println("Количество побед крестиков: " + gameBoy.getStatistics()[1]);
+            System.out.println("Количество побед ноликов: " + gameBoy.getStatistics()[0]);
             System.out.println("Хотите продолжить? Введите + или -.");
             String answer = sc.next();
             if (answer.equals("+")) {
@@ -41,88 +44,7 @@ public class TicTacToeMain {
                 nextgame = false;
             } else throw new IllegalArgumentException("Некорректный ответ.");
         } while (nextgame);
-        System.out.println("Количество побед крестиков: " + gameBoy.getStatistics()[1]);
-        System.out.println("Количество побед ноликов: " + gameBoy.getStatistics()[0]);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int[] victories = new int[2];
-        System.out.println("Игра <<Крестики-нолики 3х3>>.");
-        boolean nextgame = true;
-        do {
-            TicTacToe tictactoe = new TicTacToe();
-            byte player = 0;
-            do {
-                player = (byte) Math.abs(player - 1);
-                doTurn(player, tictactoe);
-            } while (!hasWinner(victories, tictactoe, player) && !hasDraw(tictactoe));
-            System.out.println("Хотите продолжить? Выберите + или -");
-            String answer = sc.next();
-            if (answer.equals("+")) {
-                nextgame = true;
-            } else
-            if (answer.equals("-")) {
-                nextgame = false;
-            } else {
-                throw new IllegalArgumentException("Некорректный ответ.");
-            }
-        } while (nextgame);
-    }
 
-    private static boolean hasDraw(TicTacToe tictactoe) {
-        if (tictactoe.isDraw()) {
-            System.out.println("Ничья.");
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Преобразует игрока byte в переменную String для правильного вывода текста.
-     * @param player
-     * @return Возвращает имя игрока.
-     */
-    private static String getType(byte player) {
-        String type = null;
-        if (player == 1) {
-            type = "крестики";
-        } else {
-            type = "нолики";
-        }
-        return type;
-    }
-
-    /**
-     * Ищет победителя и объявляет его при его наличии.
-     * @param victories
-     * @param tictactoe
-     * @param player
-     * @return Возвращает ответ, есть ли победитель.
-     */
-    private static boolean hasWinner(int[] victories, TicTacToe tictactoe, byte player) {
-        if (tictactoe.isWin(player)) {
-            System.out.println("Победили " + getType(player) + ".");
-            victories[player]++;
-            System.out.println("Количество побед крестиков: " + victories[1]);
-            System.out.println("Количество побед ноликов: " + victories[0]);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Ход Х или О
-     * @param player
-     * @param tictactoe
-     */
-    private static void doTurn(byte player, TicTacToe tictactoe) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ходят " + getType(player) + ":");
-        String[] xx = sc.nextLine().split(" ");
-        int x = Integer.parseInt(xx[0]);
-        int y = Integer.parseInt(xx[1]);
-        tictactoe.turn(x, y, player);
-        System.out.println(tictactoe.toString());
-    }
 }

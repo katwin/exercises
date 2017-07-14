@@ -9,8 +9,10 @@ package net.oswin.exercises.homework.tictactoe;
  */
 public class TicTacToe {
     private char[][] ttt = new char[3][3];
-    private byte prev = 0;
-    private int k = 0;
+    /**
+     * Текущий игрок
+     */
+    private byte player = 1;
 
     public TicTacToe() {
         for (int i = 0; i < 3; i++) {
@@ -25,50 +27,37 @@ public class TicTacToe {
      * @param x
      * @param y
      */
-    public void turn(int x, int y, byte player) {
+    public void turn(int x, int y) {
         char xo = ' ';
-        if (player == 1) {
-            xo = 'X';
-        } else {
-           xo = 'O';
-        }
-        if ((prev != (player)) && (ttt[x - 1][y - 1] == ' ')) {
+        xo = whoIsPlay();
+        if ((ttt[x - 1][y - 1] == ' ')) {
             ttt[x - 1][y - 1] = xo;
         } else {
             throw new IllegalArgumentException();
         }
-        k++;
-        prev = player;
+        player = (byte)Math.abs(player - 1);
     }
 
     /**
      * Определяет победу Х или О.
      * @return Возвращает true в случае победы, false - в других случаях
      */
-    public char whoIsWin(byte player, int[] victories) {
-        /**if (isWin(player) && (player == 1)) {
+    public char whoIsWin() {
+        if (isWin((byte)1)) {
             return 'X';
-        } else if (isWin(player) && (player == 0)) {
+        } else if (isWin((byte)0)) {
             return 'O';
-        }
-         */
-        if (isWin(player)) {
-            victories[player]++;
-            if (player == 1) {
-                return 'X';
-            } else return 'O';
         }
         return ' ';
     }
 
-
+    /**
+     * Проверяет, выиграл ли какой-нибудь игрок
+     * @param player какой-нибудь игрок
+     * @return true - выиграл, false - нет
+     */
     public boolean isWin(byte player) {
-        char pl = ' ';
-        if (player == 1) {
-            pl = 'X';
-        } else {
-            pl = 'O';
-        }
+        char pl = whoIsPlay(player);
         int h = 0;
         int v = 0;
         int md = 0;
@@ -91,12 +80,29 @@ public class TicTacToe {
 
     public char whoIsPlay() {
         char who = ' ';
-        if (prev == 0) {
+        who = whoIsPlay(player);
+        return who;
+    }
+
+    private char whoIsPlay(byte player) {
+        char who;
+        if (player == 1) {
             who = 'X';
         } else {
             who = 'O';
         }
         return who;
+    }
+
+    public boolean isDraw() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (ttt[i][j] == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -109,13 +115,6 @@ public class TicTacToe {
             res += "\n";
         }
         return res;
-    }
-
-    public boolean isDraw() {
-        if (k == 9) {
-            return true;
-        }
-        return false;
     }
 
 }

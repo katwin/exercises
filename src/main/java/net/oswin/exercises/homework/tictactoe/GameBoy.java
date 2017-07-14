@@ -4,31 +4,43 @@ package net.oswin.exercises.homework.tictactoe;
  * Created by Kate on 12.07.2017.
  */
 public class GameBoy {
-    private int[] victories;
-    private byte player = 1;
+    private int[] victories = new int[2];
+    private TicTacToe tictactoe;
 
-    public TicTacToe startGame() {
-        return new TicTacToe();
+    public void startGame() {
+        tictactoe = new TicTacToe();
     }
 
-    public byte whoPlay() {
-        return player;
+    public char whoPlay() {
+        return tictactoe.whoIsPlay();
     }
 
-    public void turn(TicTacToe tictactoe, int x, int y) {
-        tictactoe.turn(x,y,player);
-        player = (byte)Math.abs(player - 1);
+    public void turn(int x, int y) {
+        tictactoe.turn(x,y);
+        char whowin = whoWin();
+        if (whowin == 'X') {
+            victories[1]++;
+        }
+        if (whowin == 'O') {
+            victories[0]++;
+        }
     }
 
-    public char whoWin(TicTacToe tictactoe) {
-        return tictactoe.whoIsWin(player, victories);
+    public char whoWin() {
+        return tictactoe.whoIsWin();
     }
 
-    public boolean isEnd(TicTacToe tictactoe) {
-        return tictactoe.isWin(player);
+    public boolean isEnd() {
+        return tictactoe.isWin((byte)0) || tictactoe.isWin((byte)1) || tictactoe.isDraw();
     }
 
     public int[] getStatistics() {
         return victories;
     }
+
+    @Override
+    public String toString() {
+        return tictactoe.toString();
+    }
 }
+
