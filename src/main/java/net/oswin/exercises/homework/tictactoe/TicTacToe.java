@@ -22,6 +22,15 @@ public class TicTacToe {
         }
     }
 
+    public boolean checkTurn(int ir, int jr) {
+        if (ttt[ir][jr] == ' ') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     /**
      * Ход
      * @param x
@@ -103,6 +112,10 @@ public class TicTacToe {
             }
         }
         return true;
+    }
+
+    public char[][] getTtt() {
+        return ttt;
     }
 
     @Override

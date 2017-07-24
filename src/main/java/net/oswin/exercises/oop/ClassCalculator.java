@@ -65,7 +65,7 @@ public class ClassCalculator {
     }
     public void ce() {
         if (op == '=')
-            left = 0;
+        left = 0;
         else
             right = 0;
     }

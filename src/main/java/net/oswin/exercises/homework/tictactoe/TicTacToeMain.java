@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 /**
  * Процесс игры "Крестики-нолики".
- * Добавлена функция многоразовой игры.
- * Основной процесс игры перенесен в методы.
- * Итерация внутреннего цикла отвечает за один ход.
  */
 public class TicTacToeMain {
 
@@ -18,7 +15,7 @@ public class TicTacToeMain {
         System.out.println("Игра <<Крестики-нолики 3х3>>.");
         GameBoy gameBoy = new GameBoy();
         do {
-            gameBoy.startGame();
+            gameBoy.startGame(new TicTacToe());
             do {
                 if (gameBoy.whoPlay() == 'X') {
                     System.out.println("Ходят крестики:");
