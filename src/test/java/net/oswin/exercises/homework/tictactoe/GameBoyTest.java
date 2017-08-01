@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
  */
 public class GameBoyTest {
     @Test
-    public void test() {
+    public void testWin() {
         GameBoy gameboy = new GameBoy();
         TicTacToeAI mockAI = mock(TicTacToeAI.class);
         when(mockAI.turnAI()).thenReturn(new int[] {1,1});
@@ -23,10 +23,12 @@ public class GameBoyTest {
         when(mocks.whoIsPlay()).thenReturn('T');
         assertEquals('T', gameboy.whoPlay());
 
+        when(mocks.isWin((byte)1)).thenReturn(true);
         when(mocks.whoIsWin()).thenReturn('X');
         gameboy.turn(0,0);
         assertEquals(1, gameboy.getStatistics()[1]);
 
+        when(mocks.isWin((byte)0)).thenReturn(true);
         when(mocks.whoIsWin()).thenReturn('O');
         gameboy.turn(0,0);
         assertEquals(1, gameboy.getStatistics()[0]);

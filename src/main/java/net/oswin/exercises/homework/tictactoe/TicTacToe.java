@@ -39,10 +39,10 @@ public class TicTacToe {
     public void turn(int x, int y) {
         char xo = ' ';
         xo = whoIsPlay();
-        if ((ttt[x - 1][y - 1] == ' ')) {
-            ttt[x - 1][y - 1] = xo;
+        if ((ttt[x][y] == ' ')) {
+            ttt[x][y] = xo;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("x=" + x + " y=" + y);
         }
         player = (byte)Math.abs(player - 1);
     }

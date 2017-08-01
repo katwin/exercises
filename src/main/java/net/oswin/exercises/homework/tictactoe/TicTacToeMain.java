@@ -15,14 +15,16 @@ public class TicTacToeMain {
         System.out.println("Игра <<Крестики-нолики 3х3>>.");
         GameBoy gameBoy = new GameBoy();
         do {
-            gameBoy.startGame(new TicTacToe());
+            TicTacToe tictactoe = new TicTacToe();
+            gameBoy.startGame(tictactoe);
+            gameBoy.setAi(new TicTacToeAI(tictactoe, new GameRandomizer()));
             do {
                 if (gameBoy.whoPlay() == 'X') {
                     System.out.println("Ходят крестики:");
                 } else System.out.println("Ходят нолики:");
                 String[] xx = sc.nextLine().split(" ");
-                int x = Integer.parseInt(xx[0]);
-                int y = Integer.parseInt(xx[1]);
+                int x = Integer.parseInt(xx[0]) - 1;
+                int y = Integer.parseInt(xx[1]) - 1;
                 gameBoy.turn(x,y);
                 System.out.println(gameBoy.toString());
             } while (!gameBoy.isEnd());
@@ -34,7 +36,7 @@ public class TicTacToeMain {
             System.out.println("Количество побед крестиков: " + gameBoy.getStatistics()[1]);
             System.out.println("Количество побед ноликов: " + gameBoy.getStatistics()[0]);
             System.out.println("Хотите продолжить? Введите + или -.");
-            String answer = sc.next();
+            String answer = sc.nextLine();
             if (answer.equals("+")) {
                 nextgame = true;
             } else if (answer.equals("-")) {

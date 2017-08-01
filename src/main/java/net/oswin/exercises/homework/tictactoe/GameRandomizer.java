@@ -5,6 +5,6 @@ package net.oswin.exercises.homework.tictactoe;
  */
 public class GameRandomizer {
     public int random() {
-        return (int) ((Math.random() * 100) % 3 + 1);
+        return (int) ((Math.random() * 100) % 3);
     }
 }
