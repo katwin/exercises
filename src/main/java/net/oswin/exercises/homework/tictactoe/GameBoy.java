@@ -10,7 +10,7 @@ public class GameBoy {
 
     public void startGame(TicTacToe tictactoe) {
         this.tictactoe = tictactoe;
-        double whoFirst = (Math.random()*100)%2;
+        int whoFirst = ((int) ((Math.random()*100)))%2;
         if (whoFirst == 0) {
             int[] turn = ai.turnAI();
             innerTurn(turn[0], turn[1]);

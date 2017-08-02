@@ -1,7 +1,6 @@
 package net.oswin.exercises.homework.tictactoe;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -15,7 +14,7 @@ public class TicTacToeAITest {
     public void testTurnAI() {
         GameRandomizer mrandom = mock(GameRandomizer.class);
         TicTacToe mtictactoe = mock(TicTacToe.class);
-        TicTacToeAI ai = new TicTacToeAI(mtictactoe, mrandom);
+        TicTacToeAI2 ai = new TicTacToeAI2(mtictactoe, mrandom);
 
         char[][] ttt = fill(  "X  "
                             + "XX "
@@ -42,7 +41,7 @@ public class TicTacToeAITest {
     public void testDefence() throws Exception {
         GameRandomizer mrandom = mock(GameRandomizer.class);
         TicTacToe mtictactoe = mock(TicTacToe.class);
-        TicTacToeAI ai = new TicTacToeAI(mtictactoe, mrandom);
+        TicTacToeAI2 ai = new TicTacToeAI2(mtictactoe, mrandom);
 
         char[][] ttt = fill(
                 "XX "+
@@ -103,7 +102,7 @@ public class TicTacToeAITest {
     public void testAttack() {
         GameRandomizer mrandom = mock(GameRandomizer.class);
         TicTacToe mtictactoe = mock(TicTacToe.class);
-        TicTacToeAI ai = new TicTacToeAI(mtictactoe, mrandom);
+        TicTacToeAI2 ai = new TicTacToeAI2(mtictactoe, mrandom);
 
         char[][] ttt = fill(
                 "XX "+

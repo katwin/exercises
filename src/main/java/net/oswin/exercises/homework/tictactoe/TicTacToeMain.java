@@ -1,7 +1,5 @@
 package net.oswin.exercises.homework.tictactoe;
 
-import net.oswin.exercises.homework.tictactoe.TicTacToe;
-
 import java.util.Scanner;
 
 /**
@@ -13,11 +11,22 @@ public class TicTacToeMain {
         Scanner sc = new Scanner(System.in);
         boolean nextgame = true;
         System.out.println("Игра <<Крестики-нолики 3х3>>.");
+        System.out.println("Выберите уровень сложности: ");
+        String level = sc.nextLine();
         GameBoy gameBoy = new GameBoy();
         do {
             TicTacToe tictactoe = new TicTacToe();
+            TicTacToeAI ai = null;
+            switch (level) {
+                case "2":
+                    ai = new TicTacToeAI2(tictactoe, new GameRandomizer());
+                    break;
+                default:
+                    ai = new TicTacToeAI1(tictactoe, new GameRandomizer());
+            }
+            gameBoy.setAi(ai);
             gameBoy.startGame(tictactoe);
-            gameBoy.setAi(new TicTacToeAI(tictactoe, new GameRandomizer()));
+            System.out.println(gameBoy.toString());
             do {
                 if (gameBoy.whoPlay() == 'X') {
                     System.out.println("Ходят крестики:");

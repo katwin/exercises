@@ -13,7 +13,7 @@ public class GameBoyTest {
     @Test
     public void testWin() {
         GameBoy gameboy = new GameBoy();
-        TicTacToeAI mockAI = mock(TicTacToeAI.class);
+        TicTacToeAI2 mockAI = mock(TicTacToeAI2.class);
         when(mockAI.turnAI()).thenReturn(new int[] {1,1});
         gameboy.setAi(mockAI);
         //начало игры

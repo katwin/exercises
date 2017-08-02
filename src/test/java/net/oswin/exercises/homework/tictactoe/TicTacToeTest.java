@@ -11,22 +11,22 @@ public class TicTacToeTest {
     public void test() {
         TicTacToe tictactoe = new TicTacToe();
         Assert.assertEquals('X', tictactoe.whoIsPlay());
-        tictactoe.turn(1,1);
+        tictactoe.turn(0,0);
         Assert.assertTrue(!tictactoe.isWin((byte) 1));
         Assert.assertEquals('O', tictactoe.whoIsPlay());
-        tictactoe.turn(2,1);
-        tictactoe.turn(1,2);
-        tictactoe.turn(2,2);
-        tictactoe.turn(1,3);
+        tictactoe.turn(1,0);
+        tictactoe.turn(0,1);
+        tictactoe.turn(1,1);
+        tictactoe.turn(0,2);
         //todo проверить варианты победы Х по вертикали, главной и побочной диагонали.
         Assert.assertTrue(tictactoe.whoIsWin() == 'X');
         tictactoe = new TicTacToe();
-        tictactoe.turn(2,1);
+        tictactoe.turn(1,0);
+        tictactoe.turn(0,0);
+        tictactoe.turn(1,2);
         tictactoe.turn(1,1);
-        tictactoe.turn(2,3);
+        tictactoe.turn(2,0);
         tictactoe.turn(2,2);
-        tictactoe.turn(3,1);
-        tictactoe.turn(3,3);
         //todo проверить варианты победы О по вертикали, горизонтали и побочной диагонали.
         Assert.assertTrue(tictactoe.whoIsWin() == 'O');
     }
@@ -35,16 +35,16 @@ public class TicTacToeTest {
     public void testDraw() {
         TicTacToe tictactoe;
         tictactoe = new TicTacToe();
-        tictactoe.turn(1,1);
-        tictactoe.turn(1,3);
-        tictactoe.turn(1,2);
-        tictactoe.turn(2,1);
+        tictactoe.turn(0,0);
+        tictactoe.turn(0,2);
+        tictactoe.turn(0,1);
+        tictactoe.turn(1,0);
         Assert.assertFalse(tictactoe.isDraw());
-        tictactoe.turn(2,3);
+        tictactoe.turn(1,2);
+        tictactoe.turn(1,1);
+        tictactoe.turn(2,0);
         tictactoe.turn(2,2);
-        tictactoe.turn(3,1);
-        tictactoe.turn(3,3);
-        tictactoe.turn(3,2);
+        tictactoe.turn(2,1);
         tictactoe.whoIsWin();
         Assert.assertTrue(tictactoe.isDraw());
     }
@@ -52,9 +52,9 @@ public class TicTacToeTest {
     @Test
     public void testToString() {
         TicTacToe tictactoe = new TicTacToe();
+        tictactoe.turn(0,0);
         tictactoe.turn(1,1);
         tictactoe.turn(2,2);
-        tictactoe.turn(3,3);
         Assert.assertEquals(
                 "X     \n" +
                 "  O   \n" +
