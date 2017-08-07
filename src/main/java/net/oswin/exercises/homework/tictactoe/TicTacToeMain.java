@@ -18,6 +18,9 @@ public class TicTacToeMain {
             TicTacToe tictactoe = new TicTacToe();
             TicTacToeAI ai = null;
             switch (level) {
+                case "3":
+                    ai = new TicTacToeAI3(tictactoe, new GameRandomizer());
+                    break;
                 case "2":
                     ai = new TicTacToeAI2(tictactoe, new GameRandomizer());
                     break;

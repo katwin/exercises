@@ -146,4 +146,52 @@ public class TicTacToeAITest {
         Assert.assertEquals(1, res[0]);
         Assert.assertEquals(1, res[1]);
     }
+
+    @Test
+    public void testTicTacToeAI3() {
+        GameRandomizer mrandom = mock(GameRandomizer.class);
+        TicTacToe mtictactoe = mock(TicTacToe.class);
+        TicTacToeAI3 ai = new TicTacToeAI3(mtictactoe, mrandom);
+
+        char[][] ttt = fill(
+                "X  "+
+                "   "+
+                "   ");
+        when(mtictactoe.getTtt()).thenReturn(ttt);
+        when(mtictactoe.whoIsPlay()).thenReturn('O');
+        when(mtictactoe.checkTurn(1,1)).thenReturn(true);
+        int[] res = ai.turnAI();
+        Assert.assertEquals(1, res[0]);
+        Assert.assertEquals(1, res[1]);
+
+        ttt = fill(
+                "X  "+
+                "   "+
+                "X  ");
+        when(mtictactoe.getTtt()).thenReturn(ttt);
+        when(mtictactoe.whoIsPlay()).thenReturn('O');
+        when(mtictactoe.checkTurn(1,1)).thenReturn(true);
+        res = ai.turnAI();
+        Assert.assertEquals(1, res[0]);
+        Assert.assertEquals(0, res[1]);
+
+        ttt = fill(
+                "  O"+
+                " X "+
+                "X  ");
+        when(mtictactoe.getTtt()).thenReturn(ttt);
+        when(mtictactoe.whoIsPlay()).thenReturn('O');
+        when(mtictactoe.checkTurn(1,1)).thenReturn(false);
+        when(mtictactoe.checkTurn(0,0)).thenReturn(true);
+        when(mtictactoe.checkTurn(2,2)).thenReturn(true);
+        when(mrandom.random(2)).thenReturn(0);
+        res = ai.turnAI();
+        Assert.assertEquals(0, res[0]);
+        Assert.assertEquals(0, res[1]);
+
+        when(mrandom.random(2)).thenReturn(1);
+        res = ai.turnAI();
+        Assert.assertEquals(2, res[0]);
+        Assert.assertEquals(2, res[1]);
+    }
 }
