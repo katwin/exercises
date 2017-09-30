@@ -18,35 +18,61 @@ public class GameBoyTest {
         gameboy.setAi(mockAI);
         //начало игры
         TicTacToe mocks = mock(TicTacToe.class);
+        when(mocks.whoIsWin()).thenReturn(' ');
         gameboy.startGame(mocks);
         //кто ходит
         when(mocks.whoIsPlay()).thenReturn('T');
         assertEquals('T', gameboy.whoPlay());
 
+        //победил Х
         when(mocks.isWin((byte)1)).thenReturn(true);
+        when(mocks.isWin((byte)0)).thenReturn(false);
         when(mocks.whoIsWin()).thenReturn('X');
         gameboy.turn(0,0);
-        assertEquals(1, gameboy.getStatistics()[1]);
+        if (gameboy.getZeroTurn() == 'X') {
+            assertEquals(1, gameboy.getStatistics()[0]);
+            assertEquals(0, gameboy.getStatistics()[1]);
+        } else {
+            assertEquals(1, gameboy.getStatistics()[1]);
+            assertEquals(0, gameboy.getStatistics()[0]);
+        }
 
+        //победил О
         when(mocks.isWin((byte)0)).thenReturn(true);
+        when(mocks.isWin((byte)1)).thenReturn(false);
         when(mocks.whoIsWin()).thenReturn('O');
         gameboy.turn(0,0);
+        assertEquals(1, gameboy.getStatistics()[1]);
         assertEquals(1, gameboy.getStatistics()[0]);
 
+        //никто не победил
         when(mocks.whoIsWin()).thenReturn(' ');
+        when(mocks.isWin((byte)0)).thenReturn(false);
+        when(mocks.isWin((byte)1)).thenReturn(false);
+        when(mocks.isDraw()).thenReturn(true);
         gameboy.turn(0,0);
         assertEquals(1, gameboy.getStatistics()[0]);
         assertEquals(1, gameboy.getStatistics()[1]);
 
+        //победил Х второй раз
         when(mocks.whoIsWin()).thenReturn('X');
+        when(mocks.isWin((byte)1)).thenReturn(true);
+        when(mocks.isWin((byte)0)).thenReturn(false);
         gameboy.turn(0,0);
-        gameboy.startGame(mocks);
-        assertEquals(2, gameboy.getStatistics()[1]);
+        if (gameboy.getZeroTurn() == 'X') {
+            assertEquals(2, gameboy.getStatistics()[0]);
+            assertEquals(1, gameboy.getStatistics()[1]);
+        } else {
+            assertEquals(2, gameboy.getStatistics()[1]);
+            assertEquals(1, gameboy.getStatistics()[0]);
+        }
 
+        //победил О второй раз
         when(mocks.whoIsWin()).thenReturn('O');
+        when(mocks.isWin((byte)0)).thenReturn(true);
+        when(mocks.isWin((byte)1)).thenReturn(false);
         gameboy.turn(0,0);
-        gameboy.startGame(mocks);
+        assertEquals(2, gameboy.getStatistics()[1]);
         assertEquals(2, gameboy.getStatistics()[0]);
-
     }
 }

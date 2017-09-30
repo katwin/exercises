@@ -18,7 +18,6 @@ public class TicTacToeTest {
         tictactoe.turn(0,1);
         tictactoe.turn(1,1);
         tictactoe.turn(0,2);
-        //todo проверить варианты победы Х по вертикали, главной и побочной диагонали.
         Assert.assertTrue(tictactoe.whoIsWin() == 'X');
         tictactoe = new TicTacToe();
         tictactoe.turn(1,0);
@@ -27,7 +26,6 @@ public class TicTacToeTest {
         tictactoe.turn(1,1);
         tictactoe.turn(2,0);
         tictactoe.turn(2,2);
-        //todo проверить варианты победы О по вертикали, горизонтали и побочной диагонали.
         Assert.assertTrue(tictactoe.whoIsWin() == 'O');
     }
 
